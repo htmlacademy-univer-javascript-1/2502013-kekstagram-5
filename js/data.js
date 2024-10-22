@@ -1,3 +1,5 @@
+import {getRandomInteger, createRandomId} from './util';
+
 const DESCRIPTIONS = [
   'Какой вчера был замечательный вечер!',
   'Всем добра',
@@ -28,30 +30,6 @@ const MESSAGES = [
   'Чебурашка, ну где там полотенце?'
 ];
 
-// функция получения рандомного числа из промежутка
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
-// функция получения рандомного айди (без повторений)
-const createRandomId = (min, max) => {
-  const usedIdArray = [];
-
-  return function () {
-    let randomId = getRandomInteger(min, max);
-    if (usedIdArray.length >= (max - min + 1)) {
-      return null; // использованы все имеющиеся id
-    }
-    while (usedIdArray.includes(randomId)) {
-      randomId = getRandomInteger(min, max);
-    }
-    usedIdArray.push(randomId);
-    return randomId;
-  };
-};
 
 // генерация индекса комментария
 const generateCommentId = createRandomId(1, 30);
@@ -78,5 +56,6 @@ const createPublication = () => ({
 });
 
 // массив описаний фотографий
-const arrayPublication = Array.from({length: 25}, createPublication);
-arrayPublication();
+const arrayPublications = () => Array.from({length: 25}, createPublication);
+
+export {arrayPublications};
