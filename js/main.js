@@ -1,3 +1,3 @@
-import { getRenderedCards } from './module.js';
-getRenderedCards();
+import { renderGallery } from './module.js';
+renderGallery();
 
