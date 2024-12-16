@@ -1,5 +1,3 @@
-import './util.js';
-import {arrayPublications} from './data.js'; // массив публикаций
-import {createElements} from './miniatures.js'; // функция создания миниатюр
+import { getRenderedCards } from './module.js';
+getRenderedCards();
 
-createElements(arrayPublications); // создаем миниатюры по массиву публикаций
