@@ -1,5 +1,3 @@
-import './util.js';
-import {arrayPublications} from './data.js'; // массив публикаций
-import {createElements} from './miniatures.js'; // функция создания миниатюр
+import { renderGallery } from './module.js';
+renderGallery();
 
-createElements(arrayPublications); // создаем миниатюры по массиву публикаций
