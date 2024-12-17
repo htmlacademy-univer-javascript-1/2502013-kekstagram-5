@@ -4,6 +4,7 @@ export const onDocumentKeydown = (closingFunc) => function (evt) {
   }
 };
 
+
 export const debounce = (func, delay) => {
   let timeout;
   return function (...args) {
@@ -18,4 +19,5 @@ export const debounce = (func, delay) => {
     }
   };
 };
+
 

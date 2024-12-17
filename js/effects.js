@@ -137,4 +137,3 @@ const initEffect = () => {
 
 export {resetEffect, initEffect};
 
-//1
