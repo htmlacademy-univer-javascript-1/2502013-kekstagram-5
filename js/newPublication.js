@@ -8,6 +8,7 @@ const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
 const imageOverlay = uploadForm.querySelector('.img-upload__overlay.hidden');
 const closeButton = uploadForm.querySelector('.img-upload__cancel');
+const image = uploadForm.querySelector('.img-upload__preview img');
 const hashtagsField = uploadForm.querySelector('.text__hashtags');
 const descriptionField = uploadForm.querySelector('.text__description');
 const submitBtn = uploadForm.querySelector('#upload-submit');
@@ -21,6 +22,18 @@ const pristine = new Pristine(uploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'div',
   errorTextClass: 'img-upload__error'
+});
+
+
+uploadInput.addEventListener('change', function() {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      image.src = reader.result;
+    }, false);
+    reader.readAsDataURL(file);
+  }
 });
 
 const validateHashtagsCount = (value) => value.trim().split(' ').length <= MAX_HASHTAGS_COUNT;
@@ -86,9 +99,7 @@ function resetForm() {
 function closeOverlay(){
   imageOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  closeButton.removeEventListener('click', () => {
-    resetForm(); closeOverlay();
-  });
+  closeButton.removeEventListener('click', () => {resetForm(); closeOverlay();});
   document.removeEventListener('keydown', onDocumentKeydown(closeOverlay));
   uploadInput.addEventListener('click', openOverlay);
   uploadInput.value = null;
@@ -101,12 +112,9 @@ function openOverlay() {
   initEffect();
   imageOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  closeButton.addEventListener('click', () => {
-    resetForm(); closeOverlay();
-  });
+  closeButton.addEventListener('click', () => {resetForm(); closeOverlay();});
   document.addEventListener('keydown', onDocumentKeydown(closeOverlay));
   uploadInput.removeEventListener('click', openOverlay);
-
 }
 
 uploadInput.addEventListener('change', openOverlay);
@@ -115,8 +123,9 @@ hashtagsField.addEventListener('input', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (!isValid) {
-    submitBtn.setAttribute('disabled', true);
-  } else{
+    submitBtn.setAttribute('disabled', 'true');
+  }
+  else{
     submitBtn.removeAttribute('disabled');
   }
 });
@@ -125,8 +134,9 @@ descriptionField.addEventListener('input', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (!isValid) {
-    submitBtn.setAttribute('disabled', true);
-  } else{
+    submitBtn.setAttribute('disabled', 'true');
+  }
+  else{
     submitBtn.removeAttribute('disabled');
   }
 });
@@ -160,13 +170,9 @@ function openSuccessMessage() {
   document.body.appendChild(document.querySelector('#success').content.cloneNode(true));
   const success = document.querySelector('.success');
   success.children[0].addEventListener('click', (e) => e.stopPropagation());
-  success.addEventListener('click', () => {
-    success.remove();
-  });
+  success.addEventListener('click', () => {success.remove();});
   document.addEventListener('keydown', onDocumentKeydown(closeSuccessMessage), true);
-  success.querySelector('button').addEventListener('click', () => {
-    success.remove();
-  });
+  success.querySelector('button').addEventListener('click', () => {success.remove();});
 }
 
 function closeErrorMessage() {
@@ -178,11 +184,7 @@ function openErrorMessage() {
   document.body.appendChild(document.querySelector('#error').content.cloneNode(true));
   const error = document.querySelector('.error');
   error.children[0].addEventListener('click', (e) => e.stopPropagation());
-  error.addEventListener('click', () => {
-    error.remove();
-  });
+  error.addEventListener('click', () => {error.remove();});
   document.addEventListener('keydown', onDocumentKeydown(closeErrorMessage), true);
-  error.querySelector('button').addEventListener('click', () => {
-    error.remove();
-  });
+  error.querySelector('button').addEventListener('click', () => {error.remove();});
 }
