@@ -76,3 +76,4 @@ function closePicture(evt) {
 }
 
 export { openPicture };
+
