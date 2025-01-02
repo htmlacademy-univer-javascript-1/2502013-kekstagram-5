@@ -1,4 +1,3 @@
-
 import {getPhotoArray} from './data.js';
 import {openPicture} from './openBigPic.js';
 import {debounce} from './util.js';

@@ -23,6 +23,3 @@ export {
   SCALE_STEP,
   DEFAULT_SCALE
 };
-
-
-
