@@ -11,7 +11,7 @@ const modalElement = document.querySelector('.img-upload');
 const imageElement = modalElement.querySelector('.img-upload__preview img');
 const effectsElement = modalElement.querySelector('.effects');
 const sliderElement = modalElement.querySelector('.effect-level__slider');
-const sliderContainer = modalElement.querySelector('.img-upload__effect-level');
+const sliderContainerElement = modalElement.querySelector('.img-upload__effect-level');
 
 const effectLevelElement = modalElement.querySelector('.effect-level__value');
 
@@ -74,14 +74,14 @@ const setImageStyle = () => {
   imageElement.style.filter = `${style}(${value}${unit})`;
 };
 
-const onSliderUpd = () => {
+const onSliderUpdate = () => {
   effectLevelElement.value = sliderElement.noUiSlider.get();
   setImageStyle();
 };
 
-const showSlider = () => sliderContainer.classList.remove('hidden');
+const showSlider = () => sliderContainerElement.classList.remove('hidden');
 
-const hideSlider = () => sliderContainer.classList.add('hidden');
+const hideSlider = () => sliderContainerElement.classList.add('hidden');
 
 const createSlider = ({ min, max, step }) => {
   noUiSlider.create(sliderElement, {
@@ -94,11 +94,11 @@ const createSlider = ({ min, max, step }) => {
       from: (value) => Number(value),
     }
   });
-  sliderElement.noUiSlider.on('update', onSliderUpd);
+  sliderElement.noUiSlider.on('update', onSliderUpdate);
   hideSlider();
 };
 
-const updSlider = ({ min, max, step }) => {
+const updateSlider = ({ min, max, step }) => {
   sliderElement.noUiSlider.updateOptions({
     range: {min, max},
     step,
@@ -110,7 +110,7 @@ const setSlider = () => {
   if (isDefault()) {
     hideSlider();
   } else {
-    updSlider(effectToSliderOptions[chosenEffect]);
+    updateSlider(effectToSliderOptions[chosenEffect]);
     showSlider();
   }
 };

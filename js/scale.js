@@ -15,7 +15,8 @@ const onSmallerButtonClick = () => scaleImage(Math.max(parseInt(scaleInputElemen
 
 const onBiggerButtonClick = () => scaleImage(Math.min(parseInt(scaleInputElement.value, 10) + SCALE_STEP, Scale.MAX));
 
-const resetScale = () => {scaleImage(DEFAULT_SCALE);
+const resetScale = () => {
+  scaleImage(DEFAULT_SCALE);
 };
 
 smallerButtonElement.addEventListener('click', onSmallerButtonClick);
